@@ -1,10 +1,14 @@
-Aplikasi Multi user
-Aplikasi ini untuk memanagement role user berdasarkan level.
 
-Aplikasi ini dibuat dengan framework codeigniter 3, silahkan di download atau dikembangkan, jika ada yang ingin berdonasi atau membutuhkan jasa pembuatan aplikasi bisa  bisa hubungi saya via wa 0858-9034-4288 
+USER LOGIN
+username = admin
+password = Admin@123
 
-***********************************************************************
-Ilmu yang bermanfaat adalah ilmu yang berguna untuk banyak orang
-***********************************************************************
+======================================================================
+Keterangan singkat repository baru :
 
-Semoga Bermaanfaat ya!!!
+- Halaman Superadmin ( Butuh sedikit penyesuaian )
+- Bisa buat main menu dari sini dan bisa buat sub menu juga
+- Bisa buat akun user dengan multi level akses ( Butuh penyesuaian soal foto profil ganti aja dgn upload TTD )
+- Bisa atur akses menu user dari sini ( Butuh penyesuaian )
+- Bisa Backup database dari menu aplikasi ( Butuh sedikit penyesuaian )
+- Intinya ini toolsnya enak gitu :v tp butuh penyesuaian
