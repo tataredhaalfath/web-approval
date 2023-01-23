@@ -1,6 +1,6 @@
 
 LOGIN
-username = admin
+username = Super Admin
 password = Admin@123
 
 ======================================================================
