@@ -1,5 +1,5 @@
 
-USER LOGIN
+LOGIN
 username = admin
 password = Admin@123
 

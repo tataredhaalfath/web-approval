@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12 Jan 2023 pada 05.52
+-- Generation Time: 23 Jan 2023 pada 07.43
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `formapro`
+-- Database: `webapproval`
 --
 
 -- --------------------------------------------------------
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `tbl_akses_menu` (
   `id_menu` int(11) NOT NULL,
   `view_level` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=76 ;
 
 --
 -- Dumping data untuk tabel `tbl_akses_menu`
@@ -106,7 +106,9 @@ INSERT INTO `tbl_akses_menu` (`id`, `id_level`, `id_menu`, `view_level`) VALUES
 (70, 9, 1, 'N'),
 (71, 9, 2, 'N'),
 (72, 10, 1, 'N'),
-(73, 10, 2, 'N');
+(73, 10, 2, 'N'),
+(74, 11, 1, 'N'),
+(75, 11, 2, 'N');
 
 -- --------------------------------------------------------
 
@@ -125,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `tbl_akses_submenu` (
   `print_level` enum('Y','N') DEFAULT 'N',
   `upload_level` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=139 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=150 ;
 
 --
 -- Dumping data untuk tabel `tbl_akses_submenu`
@@ -209,7 +211,18 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (135, 10, 18, 'N', 'N', 'N', 'N', 'N', 'N'),
 (136, 10, 19, 'N', 'N', 'N', 'N', 'N', 'N'),
 (137, 10, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
-(138, 10, 23, 'N', 'N', 'N', 'N', 'N', 'N');
+(138, 10, 23, 'N', 'N', 'N', 'N', 'N', 'N'),
+(139, 11, 1, 'N', 'N', 'N', 'N', 'N', 'N'),
+(140, 11, 2, 'N', 'N', 'N', 'N', 'N', 'N'),
+(141, 11, 7, 'N', 'N', 'N', 'N', 'N', 'N'),
+(142, 11, 8, 'N', 'N', 'N', 'N', 'N', 'N'),
+(143, 11, 10, 'N', 'N', 'N', 'N', 'N', 'N'),
+(144, 11, 15, 'N', 'N', 'N', 'N', 'N', 'N'),
+(145, 11, 17, 'N', 'N', 'N', 'N', 'N', 'N'),
+(146, 11, 18, 'N', 'N', 'N', 'N', 'N', 'N'),
+(147, 11, 19, 'N', 'N', 'N', 'N', 'N', 'N'),
+(148, 11, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
+(149, 11, 23, 'N', 'N', 'N', 'N', 'N', 'N');
 
 -- --------------------------------------------------------
 
@@ -284,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `image` varchar(500) DEFAULT NULL,
   `is_active` enum('Y','N') DEFAULT 'Y',
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data untuk tabel `tbl_user`
@@ -293,11 +306,12 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
 INSERT INTO `tbl_user` (`id_user`, `username`, `full_name`, `password`, `id_level`, `image`, `is_active`) VALUES
 (1, 'Super Admin', 'Supervisor Administrator', '$2y$05$5ewysU6qdCfzUUwiSAmYeOde7o.QJjvdFNRnnLIuUVh/0SwTNSK0m', 1, 'super-admin.png', 'Y'),
 (6, 'sales', 'Sales Name', '$2y$05$CoV5Fh8Y.PRpYzocrDWvueRBSWnWYLKX4SVoYucIjq.N8JhxTPmqS', 4, 'user.png', 'Y'),
-(7, 'koorsales', 'Koordinator Sales Name', '$2y$05$Lg29RLO72eGF3FQmoNdL9ep4kgGUh6rRkvoA3Lso78WTRcKuDrX/e', 6, 'koorsales.png', 'Y'),
+(7, 'koorsales', 'Koordinator Sales Name', '$2y$05$Lg29RLO72eGF3FQmoNdL9ep4kgGUh6rRkvoA3Lso78WTRcKuDrX/e', 6, 'koorsales1.JPG', 'Y'),
 (8, 'manoperasional', 'Manager Operasional Name', '$2y$05$.hfj1aNpvnaSHiqYycz9/eA8eEDUVSf.79z/D3hsZn0eZtdleKaOG', 7, 'manoperasional1.png', 'Y'),
-(9, 'mansales', 'Manager Sales Name', '$2y$05$MqyHW5RKaWMs/hq/b/JaH.UQBQt33QUVZfT02/36fBWkn1GbyAr0m', 8, 'mansales1.png', 'Y'),
-(10, 'spvsales', 'Supervisor Sales Name', '$2y$05$j4J/ZhS4tqRzi7/KTWeOLOhdyfrwc9ZSiM7SXihjN9xFJlcRp6Tgm', 9, 'spvsales.png', 'Y'),
-(11, 'koorpm', 'Koordinator PM Name', '$2y$05$NIX0o2AW27q1mV5t/fpCB.m.99HysGSTERD/z9PE.NPoLkJQNeaJ6', 10, 'koorpm.png', 'Y');
+(9, 'mansales', 'Manager Sales Name', '$2y$05$MqyHW5RKaWMs/hq/b/JaH.UQBQt33QUVZfT02/36fBWkn1GbyAr0m', 8, 'mansales1.jpg', 'Y'),
+(10, 'spvsales', 'Supervisor Sales Name', '$2y$05$j4J/ZhS4tqRzi7/KTWeOLOhdyfrwc9ZSiM7SXihjN9xFJlcRp6Tgm', 9, 'spvsales.jpg', 'Y'),
+(11, 'koorpm', 'Koordinator PM Name', '$2y$05$NIX0o2AW27q1mV5t/fpCB.m.99HysGSTERD/z9PE.NPoLkJQNeaJ6', 10, 'koorpm.jpg', 'Y'),
+(12, 'tester', 'tester', '$2y$05$CHLx8BsIlxA/wVsMtMTHter8Xo.7qM6r.DGNdbHW5v7WbXFh/ASW.', 11, 'tester1.png', 'Y');
 
 -- --------------------------------------------------------
 
@@ -309,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `tbl_userlevel` (
   `id_level` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nama_level` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data untuk tabel `tbl_userlevel`
@@ -322,7 +336,8 @@ INSERT INTO `tbl_userlevel` (`id_level`, `nama_level`) VALUES
 (7, '  manoperasional'),
 (8, 'mansales'),
 (9, 'spvsales'),
-(10, 'koorpm');
+(10, 'koorpm'),
+(11, 'Tester');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
