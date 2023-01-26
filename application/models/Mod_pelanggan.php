@@ -1,10 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Create By : Aryo
- * Youtube : Aryo Coding
- */
+
 class Mod_pelanggan extends CI_Model
 {
 	var $table = 'pelanggan';

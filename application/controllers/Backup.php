@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * Create By 	: ARYO
- * Youtube 		: Aryo Coding
- */
+
 class Backup extends CI_Controller
 {
 	

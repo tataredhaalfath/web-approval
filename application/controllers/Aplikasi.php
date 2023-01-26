@@ -2,10 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-/**
- * Create By : Aryo
- * Youtube : Aryo Coding
- */
+
 class Aplikasi extends MY_Controller
 {
 	function __construct()
