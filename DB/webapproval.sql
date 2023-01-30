@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23 Jan 2023 pada 07.43
+-- Generation Time: 30 Jan 2023 pada 09.30
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -60,7 +60,35 @@ CREATE TABLE IF NOT EXISTS `barang` (
   `harga` decimal(10,0) DEFAULT NULL,
   `satuan` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `barang`
+--
+
+INSERT INTO `barang` (`id`, `kdbarang`, `nama`, `harga`, `satuan`) VALUES
+(1, '23011402', 'Tester', '30000', '23');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cabang`
+--
+
+CREATE TABLE IF NOT EXISTS `cabang` (
+  `id_cabang` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nama_cabang` varchar(25) NOT NULL,
+  `kepala_cabang` varchar(25) NOT NULL,
+  PRIMARY KEY (`id_cabang`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data untuk tabel `cabang`
+--
+
+INSERT INTO `cabang` (`id_cabang`, `nama_cabang`, `kepala_cabang`) VALUES
+(1, 'Pusat 1', 'Ardian'),
+(2, 'Pusat 2', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -72,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `kategori` (
   `id_kat` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nama_kat` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_kat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -107,7 +135,7 @@ INSERT INTO `tbl_akses_menu` (`id`, `id_level`, `id_menu`, `view_level`) VALUES
 (71, 9, 2, 'N'),
 (72, 10, 1, 'N'),
 (73, 10, 2, 'N'),
-(74, 11, 1, 'N'),
+(74, 11, 1, 'Y'),
 (75, 11, 2, 'N');
 
 -- --------------------------------------------------------
@@ -127,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `tbl_akses_submenu` (
   `print_level` enum('Y','N') DEFAULT 'N',
   `upload_level` enum('Y','N') DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=150 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=158 ;
 
 --
 -- Dumping data untuk tabel `tbl_akses_submenu`
@@ -155,7 +183,7 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (66, 4, 18, 'N', 'N', 'N', 'N', 'N', 'N'),
 (67, 4, 19, 'N', 'N', 'N', 'N', 'N', 'N'),
 (68, 4, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
-(82, 1, 23, 'N', 'N', 'N', 'N', 'N', 'N'),
+(82, 1, 23, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (83, 4, 23, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
 (84, 6, 1, 'N', 'N', 'N', 'N', 'N', 'N'),
 (85, 6, 2, 'N', 'N', 'N', 'N', 'N', 'N'),
@@ -222,7 +250,15 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (146, 11, 18, 'N', 'N', 'N', 'N', 'N', 'N'),
 (147, 11, 19, 'N', 'N', 'N', 'N', 'N', 'N'),
 (148, 11, 20, 'N', 'N', 'N', 'N', 'N', 'N'),
-(149, 11, 23, 'N', 'N', 'N', 'N', 'N', 'N');
+(149, 11, 23, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(150, 1, 24, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(151, 4, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
+(152, 6, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
+(153, 7, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
+(154, 8, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
+(155, 9, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
+(156, 10, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
+(157, 11, 24, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y');
 
 -- --------------------------------------------------------
 
@@ -239,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `tbl_menu` (
   `is_active` enum('Y','N') DEFAULT 'Y',
   `parent` enum('Y') DEFAULT 'Y',
   PRIMARY KEY (`id_menu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `tbl_menu`
@@ -263,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `tbl_submenu` (
   `id_menu` int(11) DEFAULT NULL,
   `is_active` enum('Y','N') DEFAULT 'Y',
   PRIMARY KEY (`id_submenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data untuk tabel `tbl_submenu`
@@ -280,7 +316,8 @@ INSERT INTO `tbl_submenu` (`id_submenu`, `nama_submenu`, `link`, `icon`, `id_men
 (18, 'Satuan', 'satuan', 'far fa-circle', 32, 'Y'),
 (19, 'Pembelian', 'pembelian', 'far fa-circle', 41, 'Y'),
 (20, 'Penjualan', 'penjualan', 'far fa-circle', 41, 'Y'),
-(23, 'Sales Menu', 'barang', 'fa-slack', 1, 'Y');
+(23, 'Sales Menu', 'cabang', 'far fa-slack', 1, 'Y'),
+(24, 'Barang tester', 'barang', 'far fa-brands', 1, 'Y');
 
 -- --------------------------------------------------------
 
