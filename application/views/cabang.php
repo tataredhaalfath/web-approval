@@ -44,7 +44,7 @@ var table;
 $(document).ready(function() {
 
     //datatables
-    table =$("tbl_cabang").DataTable({
+    table =$("#tbl_cabang").DataTable({
     	"responsive": true,
     	"autoWidth": false,
     	"language": {
@@ -108,7 +108,7 @@ const Toast = Swal.mixin({
 
 
 //delete
-function del_cabang(id_cabang){
+function del_cabang(id){
 
     Swal.fire({
   title: 'Yakin ingin menghapus data ini ?',
@@ -123,7 +123,7 @@ function del_cabang(id_cabang){
         $.ajax({
         url:"<?php echo site_url('cabang/delete');?>",
         type:"POST",
-        data:"id_cabang="+id_cabang,
+        data:"id_cabang="+id,
         cache:false,
          dataType: 'json',
         success:function(respone){
