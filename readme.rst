@@ -13,5 +13,6 @@ Keterangan singkat repository baru :
 - Bisa Backup database dari menu aplikasi ( Butuh sedikit penyesuaian )
 - Intinya ini toolsnya enak gitu :v tp butuh penyesuaian
 
-- Pembuatan Menu Cabang (Create data berhasil masuk DB, minus data belum bisa tampil di list)
+- Pembuatan Menu Cabang (Beres)
 - Menu Barang sebagai dasar pembuatan CRUD Menu Cabang (Berfungsi baik)
+- 

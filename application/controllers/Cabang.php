@@ -27,7 +27,6 @@ class Cabang extends MY_Controller
             $no++;
             $row = array();
             $row[] = $kac->nama_cabang;
-            $row[] = $kac->kepala_cabang;
             $row[] = $kac->id_cabang;
             $data[] = $row;
         }
@@ -46,8 +45,7 @@ class Cabang extends MY_Controller
     {
         $this->_validate();
 		$save  = array(
-            'nama_cabang'			=> $this->input->post('nama_cabang'),
-            'kepala_cabang'  		=> $this->input->post('kepala_cabang')
+            'nama_cabang'			=> $this->input->post('nama_cabang')
         );
             $this->Mod_cabang->insert_cabang("cabang", $save);
             echo json_encode(array("status" => TRUE));
@@ -59,7 +57,6 @@ class Cabang extends MY_Controller
         $id_cabang    = $this->input->post('id_cabang');
         $save  = array(
             'nama_cabang'			=> $this->input->post('nama_cabang'),
-            'kepala_cabang'  		=> $this->input->post('kepala_cabang')
         );
         $this->Mod_cabang->update_cabang($id_cabang, $save);
         echo json_encode(array("status" => TRUE));
@@ -90,14 +87,6 @@ class Cabang extends MY_Controller
             $data['error_string'][] = 'Nama Cabang Harus Di Isi';
             $data['status'] = FALSE;
         }
-
-        if($this->input->post('kepala_cabang') == '')
-        {
-            $data['inputerror'][] = 'kepala_cabang';
-            $data['error_string'][] = 'Kepala Cabang Harus Di Isi';
-            $data['status'] = FALSE;
-        }
-
 
         if($data['status'] === FALSE)
         {

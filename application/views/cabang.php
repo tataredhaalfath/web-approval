@@ -6,9 +6,9 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header bg-light">
-						<h3 class="card-title"><i class="fa fa-list text-blue"></i> List Cabang</h3>
+						<h3 class="card-title"><i class="fa fa-list text-blue"></i> Data Cabang</h3>
 						<div class="text-right">
-							<button type="button" class="btn btn-sm btn-outline-primary" onclick="add_cabang()" title="Add Data"><i class="fas fa-plus"></i> Tambah Cabang</button>
+							<button type="button" class="btn btn-sm btn-outline-primary" onclick="add_cbg()" title="Add Data"><i class="fas fa-plus"></i> Add</button>
 						</div>
 					</div>
 					<!-- /.card-header -->
@@ -17,7 +17,6 @@
 							<thead>
 								<tr class="bg-info">
 									<th>Nama Cabang</th>
-									<th>Kepala Cabang</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -65,7 +64,7 @@ $(document).ready(function() {
             "targets": [ -1 ], //last column
             "render": function ( data, type, row ) {
 
-            	return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_cabang("+row[4]+")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama_cabang="+row[0]+"  onclick=\"del_cabang("+row[4]+")\"><i class=\"fas fa-trash\"></i></a>";
+            	return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_cbg("+row[4]+")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama="+row[0]+"  onclick=\"delcbg("+row[4]+")\"><i class=\"fas fa-trash\"></i></a>";
 
             },
 
@@ -108,20 +107,20 @@ const Toast = Swal.mixin({
 
 
 //delete
-function del_cabang(id){
+function delcbg(id){
 
     Swal.fire({
-  title: 'Yakin ingin menghapus data ini ?',
-  text: "Data tidak dapat dipulihkan setelah dihapus",
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Ya, Hapus Data!'
+  confirmButtonText: 'Yes, delete it!'
 }).then((result) => {
 
         $.ajax({
-        url:"<?php echo site_url('cabang/delete');?>",
+        url:"<?php echo site_url('barang/delete');?>",
         type:"POST",
         data:"id_cabang="+id,
         cache:false,
@@ -130,13 +129,13 @@ function del_cabang(id){
         if (respone.status == true) {
             reload_table();
         Swal.fire(
-          'Terhapus!',
-          'Data telah dihapus dari sistem.',
-          'Sukses!'
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
         );
         }else{
           Toast.fire({
-                  icon: 'Error',
+                  icon: 'error',
                   title: 'Delete Error!!.'
                 });
         }
@@ -147,17 +146,17 @@ function del_cabang(id){
 
 
 
-function add_cabang()
+function add_cbg()
 {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal({backdrop: 'static', keyboard: false}); // show bootstrap modal
-    $('.modal-title').text('Add Barang'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Tambah Data Cabang'); // Set Title to Bootstrap modal title
 }
 
-function edit_cabang(id_cabang){
+function edit_cbg(id){
 	save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
@@ -165,7 +164,7 @@ function edit_cabang(id_cabang){
 
     //Ajax Load data from ajax
     $.ajax({
-    	url : "<?php echo site_url('cabang/edit_cabang')?>/" + id_cabang,
+    	url : "<?php echo site_url('barang/edit_barang')?>/" + id,
     	type: "GET",
     	dataType: "JSON",
     	success: function(data)
@@ -173,9 +172,8 @@ function edit_cabang(id_cabang){
 
     		$('[name="id_cabang"]').val(data.id_cabang);
     		$('[name="nama_cabang"]').val(data.nama_cabang);
-    		$('[name="kepala_cabang"]').val(data.kepala_cabang);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Cabang'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Barang'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -187,7 +185,7 @@ function edit_cabang(id_cabang){
 
 function save()
 {
-    $('#btnSave').text('Menyimpan...'); //change button text
+    $('#btnSave').text('saving...'); //change button text
     $('#btnSave').attr('disabled',true); //set button disable 
     if(save_method == 'add') {
         url = "<?php echo site_url('cabang/insert')?>";
@@ -257,16 +255,9 @@ function save()
 					<input type="hidden" value="" name="id"/> 
 					<div class="card-body">
 						<div class="form-group row ">
-							<label for="nama_cabang" class="col-sm-3 col-form-label">Nama Cabang</label>
+							<label for="nama" class="col-sm-3 col-form-label">Nama Cabang</label>
 							<div class="col-sm-9 kosong">
 								<input type="text" class="form-control" name="nama_cabang" id="nama_cabang" placeholder="Nama Cabang" >
-								<span class="help-block"></span>
-							</div>
-						</div>
-						<div class="form-group row ">
-							<label for="kepala_cabang" class="col-sm-3 col-form-label">Kepala Cabang</label>
-							<div class="col-sm-9 kosong">
-								<input type="text" class="form-control"  name="kepala_cabang" id="kepala_cabang" placeholder="Kepala Cabang" >
 								<span class="help-block"></span>
 							</div>
 						</div>

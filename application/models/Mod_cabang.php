@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Mod_cabang extends CI_Model
 {
 	var $table = 'cabang';
-	var $column_search = array('nama_cabang','kepala_cabang'); 
-	var $column_kcp = array('nama_cabang','kepala_cabang');
-	var $kcp = array('id_cabang' => 'desc'); 
+	var $column_search = array('nama_cabang'); 
+	var $column_order = array('nama_cabang');
+	var $order = array('id_cabang' => 'desc'); 
 	function __construct()
 	{
 		parent::__construct();
@@ -40,14 +40,14 @@ class Mod_cabang extends CI_Model
 	$i++;
 	}
 
-		if(isset($_POST['kcp'])) // here kcp processing
+		if(isset($_POST['order'])) // here order processing
 		{
-			$this->db->kcp_by($this->column_kcp[$_POST['kcp']['0']['column']], $_POST['kcp']['0']['dir']);
+			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
 		} 
-		else if(isset($this->kcp))
+		else if(isset($this->order))
 		{
-			$kcp = $this->kcp;
-			$this->db->kcp_by(key($kcp), $kcp[key($kcp)]);
+			$order = $this->order;
+			$this->db->order_by(key($order), $order[key($order)]);
 		}
 	}
 
@@ -81,17 +81,17 @@ class Mod_cabang extends CI_Model
 
         function update_cabang($id_cabang, $data)
     {
-        $this->db->where('id_cabang_cabang', $id_cabang);
+        $this->db->where('id_cabang', $id_cabang);
         $this->db->update('cabang', $data);
     }
 
-        function get_brg($id_cabang)
+        function get_cabang($id_cabang)
     {   
         $this->db->where('id_cabang',$id_cabang);
         return $this->db->get('cabang')->row();
     }
 
-        function delete_brg($id_cabang, $table)
+        function delete_cabang($id_cabang, $table)
     {
         $this->db->where('id_cabang', $id_cabang);
         $this->db->delete($table);
