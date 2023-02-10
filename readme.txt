@@ -1,5 +1,5 @@
 
-LOGIN
+USER LOGIN
 username = Super Admin
 password = Admin@123
 
@@ -12,3 +12,7 @@ Keterangan singkat repository baru :
 - Bisa atur akses menu user dari sini ( Butuh penyesuaian )
 - Bisa Backup database dari menu aplikasi ( Butuh sedikit penyesuaian )
 - Intinya ini toolsnya enak gitu :v tp butuh penyesuaian
+
+- Pembuatan Menu Cabang (Beres)
+- Menu Barang sebagai dasar pembuatan CRUD Menu Cabang (Berfungsi baik)
+- Lampiran Excel contoh outputnya

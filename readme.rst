@@ -15,4 +15,4 @@ Keterangan singkat repository baru :
 
 - Pembuatan Menu Cabang (Beres)
 - Menu Barang sebagai dasar pembuatan CRUD Menu Cabang (Berfungsi baik)
-- 
+- Lampiran Excel contoh outputnya
