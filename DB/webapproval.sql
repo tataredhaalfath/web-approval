@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Jan 2023 pada 09.30
+-- Generation Time: 14 Feb 2023 pada 11.10
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -72,23 +72,40 @@ INSERT INTO `barang` (`id`, `kdbarang`, `nama`, `harga`, `satuan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `barangpeminjaman`
+--
+
+CREATE TABLE IF NOT EXISTS `barangpeminjaman` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `sku` varchar(25) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `qty` int(15) NOT NULL,
+  `harga` int(15) NOT NULL,
+  `jumlah` int(15) NOT NULL,
+  `stok_po` varchar(10) NOT NULL,
+  `maks_delivery` date NOT NULL,
+  `id_peminjaman` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `cabang`
 --
 
 CREATE TABLE IF NOT EXISTS `cabang` (
   `id_cabang` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nama_cabang` varchar(25) NOT NULL,
-  `kepala_cabang` varchar(25) NOT NULL,
   PRIMARY KEY (`id_cabang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data untuk tabel `cabang`
 --
 
-INSERT INTO `cabang` (`id_cabang`, `nama_cabang`, `kepala_cabang`) VALUES
-(1, 'Pusat 1', 'Ardian'),
-(2, 'Pusat 2', 'Admin');
+INSERT INTO `cabang` (`id_cabang`, `nama_cabang`) VALUES
+(4, 'Pusat 1');
 
 -- --------------------------------------------------------
 
@@ -101,6 +118,23 @@ CREATE TABLE IF NOT EXISTS `kategori` (
   `nama_kat` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_kat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `peminjaman`
+--
+
+CREATE TABLE IF NOT EXISTS `peminjaman` (
+  `id_peminjaman` int(15) unsigned NOT NULL AUTO_INCREMENT,
+  `id_cabang` int(15) NOT NULL,
+  `from` varchar(25) NOT NULL,
+  `date` date NOT NULL,
+  `number` int(15) NOT NULL,
+  `closingdate` date NOT NULL,
+  `note` varchar(25) NOT NULL,
+  PRIMARY KEY (`id_peminjaman`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -375,6 +409,21 @@ INSERT INTO `tbl_userlevel` (`id_level`, `nama_level`) VALUES
 (9, 'spvsales'),
 (10, 'koorpm'),
 (11, 'Tester');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `userpeminjaman`
+--
+
+CREATE TABLE IF NOT EXISTS `userpeminjaman` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `nama` varchar(25) NOT NULL,
+  `approvedate` date NOT NULL,
+  `id_peminjaman` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
