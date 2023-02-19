@@ -1,9 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Backup extends CI_Controller
 {
-	
+
 	public function backupdb()
 	{
 		$this->load->dbutil();
@@ -12,10 +12,10 @@ class Backup extends CI_Controller
 			'filename'	=> 'my_db_backup.sql'
 		);
 
-		$backup= $this->dbutil->backup($aturan);
+		$backup = $this->dbutil->backup($aturan);
 
-		$nama_database = 'backup-on-'. date("Y-m-d-H-i-s").'.zip';
-		$simpan= '/backup'.$nama_database;
+		$nama_database = 'backup-on-' . date("Y-m-d-H-i-s") . '.zip';
+		$simpan = '/backup' . $nama_database;
 
 		$this->load->helper('file');
 		write_file($simpan, $backup);

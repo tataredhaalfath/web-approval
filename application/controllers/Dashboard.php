@@ -1,7 +1,8 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends MY_Controller {
+class Dashboard extends MY_Controller
+{
 
     public function __construct()
     {
@@ -14,15 +15,12 @@ class Dashboard extends MY_Controller {
 
     function index()
     {
-    	$logged_in = $this->session->userdata('logged_in');
+        $logged_in = $this->session->userdata('logged_in');
         if ($logged_in != TRUE || empty($logged_in)) {
             redirect('login');
-        }else{
-        	$this->template->load('layoutbackend','dashboard/dashboard_data');
+        } else {
+            $this->template->load('layoutbackend', 'dashboard/dashboard_data');
         }
-        
     }
-
 }
 /* End of file Controllername.php */
- 
