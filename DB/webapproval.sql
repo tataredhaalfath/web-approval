@@ -1,20 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
--- http://www.phpmyadmin.net
+-- version 5.1.0
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 14 Feb 2023 pada 11.10
--- Versi Server: 5.6.16
--- PHP Version: 5.5.9
+-- Host: localhost
+-- Generation Time: Feb 24, 2023 at 09:47 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `webapproval`
@@ -23,25 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `aplikasi`
+-- Table structure for table `aplikasi`
 --
 
-CREATE TABLE IF NOT EXISTS `aplikasi` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `aplikasi` (
+  `id` int(10) UNSIGNED NOT NULL,
   `nama_owner` varchar(100) DEFAULT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `tlp` varchar(50) DEFAULT NULL,
   `title` varchar(20) DEFAULT NULL,
   `nama_aplikasi` varchar(100) DEFAULT NULL,
   `logo` varchar(100) DEFAULT NULL,
   `copy_right` varchar(50) DEFAULT NULL,
   `versi` varchar(20) DEFAULT NULL,
-  `tahun` year(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
+  `tahun` year(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `aplikasi`
+-- Dumping data for table `aplikasi`
 --
 
 INSERT INTO `aplikasi` (`id`, `nama_owner`, `alamat`, `tlp`, `title`, `nama_aplikasi`, `logo`, `copy_right`, `versi`, `tahun`) VALUES
@@ -50,20 +50,19 @@ INSERT INTO `aplikasi` (`id`, `nama_owner`, `alamat`, `tlp`, `title`, `nama_apli
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
-CREATE TABLE IF NOT EXISTS `barang` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `barang` (
+  `id` int(11) UNSIGNED NOT NULL,
   `kdbarang` varchar(15) DEFAULT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `harga` decimal(10,0) DEFAULT NULL,
-  `satuan` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=2 ;
+  `satuan` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id`, `kdbarang`, `nama`, `harga`, `satuan`) VALUES
@@ -72,11 +71,11 @@ INSERT INTO `barang` (`id`, `kdbarang`, `nama`, `harga`, `satuan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barangpeminjaman`
+-- Table structure for table `barangpeminjaman`
 --
 
-CREATE TABLE IF NOT EXISTS `barangpeminjaman` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `barangpeminjaman` (
+  `id` int(11) UNSIGNED NOT NULL,
   `sku` varchar(25) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `qty` int(15) NOT NULL,
@@ -84,24 +83,22 @@ CREATE TABLE IF NOT EXISTS `barangpeminjaman` (
   `jumlah` int(15) NOT NULL,
   `stok_po` varchar(10) NOT NULL,
   `maks_delivery` date NOT NULL,
-  `id_peminjaman` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `id_peminjaman` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cabang`
+-- Table structure for table `cabang`
 --
 
-CREATE TABLE IF NOT EXISTS `cabang` (
-  `id_cabang` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `nama_cabang` varchar(25) NOT NULL,
-  PRIMARY KEY (`id_cabang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+CREATE TABLE `cabang` (
+  `id_cabang` int(11) UNSIGNED NOT NULL,
+  `nama_cabang` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `cabang`
+-- Dumping data for table `cabang`
 --
 
 INSERT INTO `cabang` (`id_cabang`, `nama_cabang`) VALUES
@@ -110,48 +107,45 @@ INSERT INTO `cabang` (`id_cabang`, `nama_cabang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `kategori` (
-  `id_kat` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `nama_kat` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_kat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+CREATE TABLE `kategori` (
+  `id_kat` int(11) UNSIGNED NOT NULL,
+  `nama_kat` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `peminjaman`
+-- Table structure for table `peminjaman`
 --
 
-CREATE TABLE IF NOT EXISTS `peminjaman` (
-  `id_peminjaman` int(15) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `peminjaman` (
+  `id_peminjaman` int(15) UNSIGNED NOT NULL,
   `id_cabang` int(15) NOT NULL,
   `from` varchar(25) NOT NULL,
   `date` date NOT NULL,
   `number` int(15) NOT NULL,
   `closingdate` date NOT NULL,
-  `note` varchar(25) NOT NULL,
-  PRIMARY KEY (`id_peminjaman`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `note` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_akses_menu`
+-- Table structure for table `tbl_akses_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_akses_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_akses_menu` (
+  `id` int(11) NOT NULL,
   `id_level` int(11) NOT NULL,
   `id_menu` int(11) NOT NULL,
-  `view_level` enum('Y','N') DEFAULT 'N',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=76 ;
+  `view_level` enum('Y','N') DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_akses_menu`
+-- Dumping data for table `tbl_akses_menu`
 --
 
 INSERT INTO `tbl_akses_menu` (`id`, `id_level`, `id_menu`, `view_level`) VALUES
@@ -175,11 +169,11 @@ INSERT INTO `tbl_akses_menu` (`id`, `id_level`, `id_menu`, `view_level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_akses_submenu`
+-- Table structure for table `tbl_akses_submenu`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_akses_submenu` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_akses_submenu` (
+  `id` int(11) UNSIGNED NOT NULL,
   `id_level` int(11) NOT NULL,
   `id_submenu` int(11) NOT NULL,
   `view_level` enum('Y','N') DEFAULT 'N',
@@ -187,12 +181,11 @@ CREATE TABLE IF NOT EXISTS `tbl_akses_submenu` (
   `edit_level` enum('Y','N') DEFAULT 'N',
   `delete_level` enum('Y','N') DEFAULT 'N',
   `print_level` enum('Y','N') DEFAULT 'N',
-  `upload_level` enum('Y','N') DEFAULT 'N',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=158 ;
+  `upload_level` enum('Y','N') DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_akses_submenu`
+-- Dumping data for table `tbl_akses_submenu`
 --
 
 INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `add_level`, `edit_level`, `delete_level`, `print_level`, `upload_level`) VALUES
@@ -292,27 +285,34 @@ INSERT INTO `tbl_akses_submenu` (`id`, `id_level`, `id_submenu`, `view_level`, `
 (154, 8, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
 (155, 9, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
 (156, 10, 24, 'N', 'N', 'N', 'N', 'N', 'N'),
-(157, 11, 24, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y');
+(157, 11, 24, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(158, 1, 25, 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+(159, 4, 25, 'N', 'N', 'N', 'N', 'N', 'N'),
+(160, 6, 25, 'N', 'N', 'N', 'N', 'N', 'N'),
+(161, 7, 25, 'N', 'N', 'N', 'N', 'N', 'N'),
+(162, 8, 25, 'N', 'N', 'N', 'N', 'N', 'N'),
+(163, 9, 25, 'N', 'N', 'N', 'N', 'N', 'N'),
+(164, 10, 25, 'N', 'N', 'N', 'N', 'N', 'N'),
+(165, 11, 25, 'N', 'N', 'N', 'N', 'N', 'N');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_menu`
+-- Table structure for table `tbl_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_menu` (
-  `id_menu` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_menu` (
+  `id_menu` int(11) NOT NULL,
   `nama_menu` varchar(50) DEFAULT NULL,
   `link` varchar(100) DEFAULT NULL,
   `icon` varchar(50) DEFAULT NULL,
   `urutan` bigint(11) DEFAULT NULL,
   `is_active` enum('Y','N') DEFAULT 'Y',
-  `parent` enum('Y') DEFAULT 'Y',
-  PRIMARY KEY (`id_menu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=3 ;
+  `parent` enum('Y') DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_menu`
+-- Dumping data for table `tbl_menu`
 --
 
 INSERT INTO `tbl_menu` (`id_menu`, `nama_menu`, `link`, `icon`, `urutan`, `is_active`, `parent`) VALUES
@@ -322,21 +322,20 @@ INSERT INTO `tbl_menu` (`id_menu`, `nama_menu`, `link`, `icon`, `urutan`, `is_ac
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_submenu`
+-- Table structure for table `tbl_submenu`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_submenu` (
-  `id_submenu` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_submenu` (
+  `id_submenu` int(11) UNSIGNED NOT NULL,
   `nama_submenu` varchar(50) DEFAULT NULL,
   `link` varchar(100) DEFAULT NULL,
   `icon` varchar(50) DEFAULT NULL,
   `id_menu` int(11) DEFAULT NULL,
-  `is_active` enum('Y','N') DEFAULT 'Y',
-  PRIMARY KEY (`id_submenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=25 ;
+  `is_active` enum('Y','N') DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_submenu`
+-- Dumping data for table `tbl_submenu`
 --
 
 INSERT INTO `tbl_submenu` (`id_submenu`, `nama_submenu`, `link`, `icon`, `id_menu`, `is_active`) VALUES
@@ -351,32 +350,32 @@ INSERT INTO `tbl_submenu` (`id_submenu`, `nama_submenu`, `link`, `icon`, `id_men
 (19, 'Pembelian', 'pembelian', 'far fa-circle', 41, 'Y'),
 (20, 'Penjualan', 'penjualan', 'far fa-circle', 41, 'Y'),
 (23, 'Sales Menu', 'cabang', 'far fa-slack', 1, 'Y'),
-(24, 'Barang tester', 'barang', 'far fa-brands', 1, 'Y');
+(24, 'Barang tester', 'barang', 'far fa-brands', 1, 'Y'),
+(25, 'Peminjaman', 'peminjaman', 'far-fa-circle', 1, 'Y');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_user` (
-  `id_user` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbl_user` (
+  `id_user` int(11) UNSIGNED NOT NULL,
   `username` varchar(20) DEFAULT NULL,
   `full_name` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `id_level` int(11) DEFAULT NULL,
   `image` varchar(500) DEFAULT NULL,
-  `is_active` enum('Y','N') DEFAULT 'Y',
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=13 ;
+  `is_active` enum('Y','N') DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_user`, `username`, `full_name`, `password`, `id_level`, `image`, `is_active`) VALUES
 (1, 'Super Admin', 'Supervisor Administrator', '$2y$05$5ewysU6qdCfzUUwiSAmYeOde7o.QJjvdFNRnnLIuUVh/0SwTNSK0m', 1, 'super-admin.png', 'Y'),
-(6, 'sales', 'Sales Name', '$2y$05$CoV5Fh8Y.PRpYzocrDWvueRBSWnWYLKX4SVoYucIjq.N8JhxTPmqS', 4, 'user.png', 'Y'),
+(6, 'sales', 'Sales Name', '$2y$05$ApMvlG75ELkxj4O6Tusqb.lD7V7jLHiY0w.XBi2FFmkP0ojXrkEiu', 4, 'user.png', 'Y'),
 (7, 'koorsales', 'Koordinator Sales Name', '$2y$05$Lg29RLO72eGF3FQmoNdL9ep4kgGUh6rRkvoA3Lso78WTRcKuDrX/e', 6, 'koorsales1.JPG', 'Y'),
 (8, 'manoperasional', 'Manager Operasional Name', '$2y$05$.hfj1aNpvnaSHiqYycz9/eA8eEDUVSf.79z/D3hsZn0eZtdleKaOG', 7, 'manoperasional1.png', 'Y'),
 (9, 'mansales', 'Manager Sales Name', '$2y$05$MqyHW5RKaWMs/hq/b/JaH.UQBQt33QUVZfT02/36fBWkn1GbyAr0m', 8, 'mansales1.jpg', 'Y'),
@@ -387,17 +386,16 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `full_name`, `password`, `id_leve
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_userlevel`
+-- Table structure for table `tbl_userlevel`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_userlevel` (
-  `id_level` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `nama_level` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=12 ;
+CREATE TABLE `tbl_userlevel` (
+  `id_level` int(11) UNSIGNED NOT NULL,
+  `nama_level` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_userlevel`
+-- Dumping data for table `tbl_userlevel`
 --
 
 INSERT INTO `tbl_userlevel` (`id_level`, `nama_level`) VALUES
@@ -413,17 +411,181 @@ INSERT INTO `tbl_userlevel` (`id_level`, `nama_level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `userpeminjaman`
+-- Table structure for table `userpeminjaman`
 --
 
-CREATE TABLE IF NOT EXISTS `userpeminjaman` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `userpeminjaman` (
+  `id` int(11) UNSIGNED NOT NULL,
   `id_user` int(11) NOT NULL,
   `nama` varchar(25) NOT NULL,
   `approvedate` date NOT NULL,
-  `id_peminjaman` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `id_peminjaman` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `aplikasi`
+--
+ALTER TABLE `aplikasi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barang`
+--
+ALTER TABLE `barang`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `barangpeminjaman`
+--
+ALTER TABLE `barangpeminjaman`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cabang`
+--
+ALTER TABLE `cabang`
+  ADD PRIMARY KEY (`id_cabang`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kat`);
+
+--
+-- Indexes for table `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  ADD PRIMARY KEY (`id_peminjaman`);
+
+--
+-- Indexes for table `tbl_akses_menu`
+--
+ALTER TABLE `tbl_akses_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_akses_submenu`
+--
+ALTER TABLE `tbl_akses_submenu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_menu`
+--
+ALTER TABLE `tbl_menu`
+  ADD PRIMARY KEY (`id_menu`);
+
+--
+-- Indexes for table `tbl_submenu`
+--
+ALTER TABLE `tbl_submenu`
+  ADD PRIMARY KEY (`id_submenu`);
+
+--
+-- Indexes for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- Indexes for table `tbl_userlevel`
+--
+ALTER TABLE `tbl_userlevel`
+  ADD PRIMARY KEY (`id_level`);
+
+--
+-- Indexes for table `userpeminjaman`
+--
+ALTER TABLE `userpeminjaman`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `aplikasi`
+--
+ALTER TABLE `aplikasi`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `barang`
+--
+ALTER TABLE `barang`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `barangpeminjaman`
+--
+ALTER TABLE `barangpeminjaman`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cabang`
+--
+ALTER TABLE `cabang`
+  MODIFY `id_cabang` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id_kat` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `peminjaman`
+--
+ALTER TABLE `peminjaman`
+  MODIFY `id_peminjaman` int(15) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_akses_menu`
+--
+ALTER TABLE `tbl_akses_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
+--
+-- AUTO_INCREMENT for table `tbl_akses_submenu`
+--
+ALTER TABLE `tbl_akses_submenu`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+
+--
+-- AUTO_INCREMENT for table `tbl_menu`
+--
+ALTER TABLE `tbl_menu`
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_submenu`
+--
+ALTER TABLE `tbl_submenu`
+  MODIFY `id_submenu` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `id_user` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_userlevel`
+--
+ALTER TABLE `tbl_userlevel`
+  MODIFY `id_level` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `userpeminjaman`
+--
+ALTER TABLE `userpeminjaman`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
