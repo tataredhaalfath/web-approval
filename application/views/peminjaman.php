@@ -6,20 +6,29 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-header bg-light">
-						<h3 class="card-title"><i class="fa fa-list text-blue"></i> Data Barang</h3>
+						<h3 class="card-title"><i class="fa fa-list text-blue"></i> Form Peminjaman Barang </h3>
 						<div class="text-right">
-							<button type="button" class="btn btn-sm btn-outline-primary" onclick="add_brg()" title="Add Data"><i class="fas fa-plus"></i> Add</button>
+							<button type="button" class="btn btn-sm btn-outline-primary" onclick="add_form()" title="Ajukan Baru"><i class="fas fa-plus"></i> Ajukan Baru</button>
 						</div>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<table id="tbl_barang" class="table table-bordered table-striped table-hover">
+						<table id="tbl_peminjaman" class="table table-bordered table-striped table-hover">
 							<thead>
 								<tr class="bg-info">
-									<th>Kode barang</th>
-									<th>Nama barang</th>
-									<th>Harga</th>
-									<th>Satuan</th>
+									<th>Kepada</th>
+									<th>Dari</th>
+									<th>Tgl</th>
+									<th>No</th>
+									<th>SKU</th>
+									<th>Nama Barang</th>
+									<th>Qty</th>
+									<th>Harga Satuan</th>
+									<th>Total</th>
+									<th>Stok/PO</th>
+									<th>Maks Delivery</th>
+									<th>Tanggal Maks Closing</th>
+									<th>Note</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -46,11 +55,11 @@ var table;
 $(document).ready(function() {
 
     //datatables
-    table =$("#tbl_barang").DataTable({
+    table =$("#tbl_peminjaman").DataTable({
     	"responsive": true,
     	"autoWidth": false,
     	"language": {
-    		"sEmptyTable": "Data Barang Belum Ada"
+    		"sEmptyTable": "Data Pengajuan Kosong"
     	},
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -58,7 +67,7 @@ $(document).ready(function() {
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-        	"url": "<?php echo site_url('barang/ajax_list')?>",
+        	"url": "<?php echo site_url('peminjaman/ajax_list')?>",
         	"type": "POST"
         },
          //Set column definition initialisation properties.
@@ -67,7 +76,7 @@ $(document).ready(function() {
             "targets": [ -1 ], //last column
             "render": function ( data, type, row ) {
 
-            	return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_brg("+row[4]+")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama="+row[0]+"  onclick=\"delbrg("+row[4]+")\"><i class=\"fas fa-trash\"></i></a>";
+            	return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_pem("+row[4]+")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama="+row[0]+"  onclick=\"del_pem("+row[4]+")\"><i class=\"fas fa-trash\"></i></a>";
 
             },
 
@@ -110,22 +119,22 @@ const Toast = Swal.mixin({
 
 
 //delete
-function delbrg(id){
+function del_pem(id){
 
     Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
+  title: 'Yakin ingin menghapus data ini ?',
+  text: "Data yg dihapus tidak dapat dikembalikan !",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
+  confirmButtonText: 'Hapus saja!'
 }).then((result) => {
 
         $.ajax({
-        url:"<?php echo site_url('barang/delete');?>",
+        url:"<?php echo site_url('peminjaman/delete');?>",
         type:"POST",
-        data:"id="+id,
+        data:"id_peminjaman="+id,
         cache:false,
          dataType: 'json',
         success:function(respone){
@@ -133,7 +142,7 @@ function delbrg(id){
             reload_table();
         Swal.fire(
           'Deleted!',
-          'Your file has been deleted.',
+          'Data telah dihapus.',
           'success'
         );
         }else{
@@ -149,17 +158,17 @@ function delbrg(id){
 
 
 
-function add_brg()
+function add_form()
 {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal({backdrop: 'static', keyboard: false}); // show bootstrap modal
-    $('.modal-title').text('Add Barang'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Ajukan Baru'); // Set Title to Bootstrap modal title
 }
 
-function edit_brg(id){
+function edit_pem(id){
 	save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
@@ -167,16 +176,26 @@ function edit_brg(id){
 
     //Ajax Load data from ajax
     $.ajax({
-    	url : "<?php echo site_url('barang/edit_barang')?>/" + id,
+    	url : "<?php echo site_url('peminjaman/edit_pem')?>/" + id,
     	type: "GET",
     	dataType: "JSON",
     	success: function(data)
     	{
-
-    		$('[name="id"]').val(data.id);
-    		$('[name="nama"]').val(data.nama);
-    		$('[name="harga"]').val(data.harga);
-    		$('[name="satuan"]').val(data.satuan);
+    		$('[name="id_peminjaman"]').val(data.id_peminjaman);
+    		$('[name="id_cabang"]').val(data.kepada);
+    		$('[name="from"]').val(data.dari);
+    		$('[name="date"]').val(data.tgl);
+			$('[name="number"]').val(data.no);
+			$('[name="id"]').val(data.id_barang);
+    		$('[name="sku"]').val(data.sku);
+    		$('[name="nama"]').val(data.nama_barang);
+			$('[name="qty"]').val(data.qty);
+    		$('[name="harga"]').val(data.harga_satuan);
+    		$('[name="jumlah"]').val(data.total);
+			$('[name="stok_po"]').val(data.stokpo);
+    		$('[name="maks_deliveru"]').val(data.maks_delivery);
+    		$('[name="closingdate"]').val(data.tgl_closing);
+			$('[name="note"]').val(data.note);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Barang'); // Set title to Bootstrap modal title
 
