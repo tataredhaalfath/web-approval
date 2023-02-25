@@ -50,7 +50,6 @@
 
   <!-- Bootstrap4 Duallistbox -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-
 </head>
 
 <body class="hold-transition sidebar-mini">

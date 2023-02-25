@@ -1,51 +1,47 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Mod_peminjaman extends CI_Model
 {
 	var $table = 'peminjaman';
-	var $column_search = array('id_cabang','from','date','number','closingdate','note'); 
-	var $column_order = array('id_cabang','from','date','number','closingdate','note');
-	var $order = array('id_peminjaman' => 'desc'); 
+	var $column_search = array('id_cabang', 'from', 'date', 'number', 'closingdate', 'note');
+	var $column_order = array('id_cabang', 'from', 'date', 'number', 'closingdate', 'note');
+	var $order = array('id_peminjaman' => 'desc');
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
 	}
 
-		private function _get_datatables_query()
+	private function _get_datatables_query()
 	{
-		
+
 		$this->db->from('peminjaman');
 		$i = 0;
 
-	foreach ($this->column_search as $item) // loop column 
-	{
-	if($_POST['search']['value']) // if datatable send POST for search
-	{
+		foreach ($this->column_search as $item) // loop column 
+		{
+			if ($_POST['search']['value']) // if datatable send POST for search
+			{
 
-	if($i===0) // first loop
-	{
-	$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-	$this->db->like($item, $_POST['search']['value']);
-	}
-	else
-	{
-		$this->db->or_like($item, $_POST['search']['value']);
-	}
+				if ($i === 0) // first loop
+				{
+					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+					$this->db->like($item, $_POST['search']['value']);
+				} else {
+					$this->db->or_like($item, $_POST['search']['value']);
+				}
 
-		if(count($this->column_search) - 1 == $i) //last loop
-		$this->db->group_end(); //close bracket
-	}
-	$i++;
-	}
+				if (count($this->column_search) - 1 == $i) //last loop
+					$this->db->group_end(); //close bracket
+			}
+			$i++;
+		}
 
-		if(isset($_POST['order'])) // here order processing
+		if (isset($_POST['order'])) // here order processing
 		{
 			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
+		} else if (isset($this->order)) {
 			$order = $this->order;
 			$this->db->order_by(key($order), $order[key($order)]);
 		}
@@ -54,7 +50,7 @@ class Mod_peminjaman extends CI_Model
 	function get_datatables()
 	{
 		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
+		if ($_POST['length'] != -1)
 			$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
@@ -74,27 +70,28 @@ class Mod_peminjaman extends CI_Model
 	}
 
 	function insert_peminjaman($table, $data)
-    {
-        $insert = $this->db->insert($table, $data);
-        return $insert;
-    }
+	{
+		$this->db->insert($table, $data);
+		$insert_id = $this->db->insert_id();
 
-        function update_peminjaman($id_peminjaman, $data)
-    {
-        $this->db->where('id_peminjaman', $id_peminjaman);
-        $this->db->update('peminjaman', $data);
-    }
+   return  $insert_id;
+	}
 
-        function get_peminjaman($id_peminjaman)
-    {   
-        $this->db->where('id_peminjaman',$id_peminjaman);
-        return $this->db->get('peminjaman')->row();
-    }
+	function update_peminjaman($id_peminjaman, $data)
+	{
+		$this->db->where('id_peminjaman', $id_peminjaman);
+		$this->db->update('peminjaman', $data);
+	}
 
-        function delete_peminjaman($id_peminjaman, $table)
-    {
-        $this->db->where('id_peminjaman', $id_peminjaman);
-        $this->db->delete($table);
-    }
+	function get_peminjaman($id_peminjaman)
+	{
+		$this->db->where('id_peminjaman', $id_peminjaman);
+		return $this->db->get('peminjaman')->row();
+	}
 
+	function delete_peminjaman($id_peminjaman, $table)
+	{
+		$this->db->where('id_peminjaman', $id_peminjaman);
+		$this->db->delete($table);
+	}
 }

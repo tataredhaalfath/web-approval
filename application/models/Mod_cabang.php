@@ -89,8 +89,10 @@ class Mod_cabang extends CI_Model
 
 	function get_cabanglist()
 	{
-		$query = $this->db->query("SELECT 'id_cabang', 'nama_cabang' FROM cabang");
-		return $this->db->query($query)->result();
+		$this->db->select('*');
+		$this->db->from('cabang');
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 
 	function delete_cabang($id_cabang, $table)
