@@ -51,13 +51,13 @@
                     <div class="table-responsive">
                       <table class="table" id="dynamic">
                         <tr>
-                          <td><input type="text" class="form-control" value="No. 1" disabled></td>
-                          <td><input type="text" id="name1" placeholder="Nama Barang" class="form-control" required /></td>
-                          <td><input type="number" id="qty1" placeholder="QTY" class="form-control" required /></td>
-                          <td><input type="number" id="price1" placeholder="Harga Satuan" class="form-control" required /></td>
-                          <td><input type="number" id="total1" placeholder="Total" class="form-control" required /></td>
-                          <td><input type="date" id="maks1" placeholder="Maks Delivery" class="form-control date" required /></td>
-                          <td><button type="button" id="tambah" class="btn btn-success">Add</button></td>
+                          <td>Nomor<input type="text" class="form-control" value="No. 1" disabled></td>
+                          <td>Nama Barang<input type="text" id="name1" placeholder="Nama Barang" class="form-control" required /></td>
+                          <td>Jumlah<input type="number" id="qty1" placeholder="QTY" class="form-control" required /></td>
+                          <td>Harga Satuan<input type="number" id="price1" placeholder="Harga Satuan" class="form-control" required /></td>
+                          <td>Total Harga<input type="number" id="total1" placeholder="Total" class="form-control" required /></td>
+                          <td>Maksimal Delivery<input type="date" id="maks1" placeholder="Maks Delivery" class="form-control date" required /></td>
+                          <td>Tambah List<button type="button" id="tambah" class="btn btn-success">Add +</button></td>
                         </tr>
                       </table>
                     </div>
@@ -66,11 +66,13 @@
                 <div class="form-group row">
                   <div class="col col-sm-6 col-md-4 col-lg-4 col-lg-4">
                     <div class="kosong">
+                      <label for='closingdate'>Tanggal closing</label>
                       <input type="date" class="form-control" name="closingdate" id="closingdate" placeholder="Tanggal maksimal closing">
                     </div>
                   </div>
                   <div class="col col-sm-6 col-md-4 col-lg-4 col-lg-4">
                     <div class="kosong">
+                      <label for='note'>Note</label>
                       <input type="text" class="form-control" name="note" id="note" placeholder="catatan">
                     </div>
                   </div>
