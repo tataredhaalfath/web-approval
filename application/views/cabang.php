@@ -62,7 +62,7 @@
 					"targets": [-1], //last column
 					"render": function(data, type, row) {
 
-						return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_cbg(" + row[4] + ")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama=" + row[0] + "  onclick=\"delcbg(" + row[4] + ")\"><i class=\"fas fa-trash\"></i></a>";
+						return "<a class=\"btn btn-xs btn-outline-primary\" href=\"javascript:void(0)\" title=\"Edit\" onclick=\"edit_cabang(" + row[4] + ")\"><i class=\"fas fa-edit\"></i></a><a class=\"btn btn-xs btn-outline-danger\" href=\"javascript:void(0)\" title=\"Delete\" nama_cabang=" + row[0] + "  onclick=\"delcbg(" + row[4] + ")\"><i class=\"fas fa-trash\"></i></a>";
 
 					},
 
@@ -104,7 +104,7 @@
 
 
 	//delete
-	function delcbg(id) {
+	function delcbg(id_cabang) {
 
 		Swal.fire({
 			title: 'Are you sure?',
@@ -117,9 +117,9 @@
 		}).then((result) => {
 
 			$.ajax({
-				url: "<?php echo site_url('barang/delete'); ?>",
+				url: "<?php echo site_url('cabang/delete'); ?>",
 				type: "POST",
-				data: "id_cabang=" + id,
+				data: "id_cabang=" + id_cabang,
 				cache: false,
 				dataType: 'json',
 				success: function(respone) {
@@ -155,7 +155,7 @@
 		$('.modal-title').text('Tambah Data Cabang'); // Set Title to Bootstrap modal title
 	}
 
-	function edit_cbg(id) {
+	function edit_cabang(id_cabang) {
 		save_method = 'update';
 		$('#form')[0].reset(); // reset form on modals
 		$('.form-group').removeClass('has-error'); // clear error class
@@ -163,7 +163,7 @@
 
 		//Ajax Load data from ajax
 		$.ajax({
-			url: "<?php echo site_url('barang/edit_barang') ?>/" + id,
+			url: "<?php echo site_url('cabang/edit_cabang') ?>/" + id_cabang,
 			type: "GET",
 			dataType: "JSON",
 			success: function(data) {
@@ -171,7 +171,7 @@
 				$('[name="id_cabang"]').val(data.id_cabang);
 				$('[name="nama_cabang"]').val(data.nama_cabang);
 				$('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-				$('.modal-title').text('Edit Barang'); // Set title to Bootstrap modal title
+				$('.modal-title').text('Edit Cabang'); // Set title to Bootstrap modal title
 
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -242,7 +242,7 @@
 			</div>
 			<div class="modal-body form">
 				<form action="#" id="form" class="form-horizontal">
-					<input type="hidden" value="" name="id" />
+					<input type="hidden" value="" name="id_cabang" />
 					<div class="card-body">
 						<div class="form-group row ">
 							<label for="nama" class="col-sm-3 col-form-label">Nama Cabang</label>

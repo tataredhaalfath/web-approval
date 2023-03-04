@@ -23,11 +23,10 @@ class Cabang extends MY_Controller
         $list = $this->Mod_cabang->get_datatables();
         $data = array();
         $no = $_POST['start'];
-        foreach ($list as $kac) {
+        foreach ($list as $cbg) {
             $no++;
             $row = array();
-            $row[] = $kac->nama_cabang;
-            $row[] = $kac->id_cabang;
+            $row[] = $cbg->nama_cabang;
             $data[] = $row;
         }
 
@@ -45,7 +44,7 @@ class Cabang extends MY_Controller
     {
         $this->_validate();
         $save  = array(
-            'nama_cabang'            => $this->input->post('nama_cabang')
+            'nama_cabang'            => $this->input->post('nama_cabang'),
         );
         $this->Mod_cabang->insert_cabang("cabang", $save);
         echo json_encode(array("status" => TRUE));
@@ -54,9 +53,9 @@ class Cabang extends MY_Controller
     public function update()
     {
         $this->_validate();
-        $id_cabang    = $this->input->post('id_cabang');
+        $id_cabang      = $this->input->post('id_cabang');
         $save  = array(
-            'nama_cabang'            => $this->input->post('nama_cabang'),
+            'nama_cabang' => $this->input->post('nama_cabang'),
         );
         $this->Mod_cabang->update_cabang($id_cabang, $save);
         echo json_encode(array("status" => TRUE));
@@ -83,7 +82,7 @@ class Cabang extends MY_Controller
 
         if ($this->input->post('nama_cabang') == '') {
             $data['inputerror'][] = 'nama_cabang';
-            $data['error_string'][] = 'Nama Cabang Harus Di Isi';
+            $data['error_string'][] = 'Nama Cabang Tidak Boleh Kosong';
             $data['status'] = FALSE;
         }
 
