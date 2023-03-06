@@ -33,6 +33,7 @@ class Peminjaman extends MY_Controller
   {
     $dataPeminjaman = array(
       'id_cabang' => $this->input->post('direction'),
+      'id_user' => $this->input->post('userId'),
       'from' => $this->input->post('from'),
       'date' => $this->input->post('date'),
       'number' => $this->input->post('number'),
@@ -59,5 +60,35 @@ class Peminjaman extends MY_Controller
       $this->Mod_barangpeminjaman->insert_barangpeminjaman('barangpeminjaman', $data);
     }
     echo "Data peminjaman berhasil disimpan";
+  }
+
+  public function ajax_list()
+  {
+    ini_set('memory_limit', '512M');
+    set_time_limit(3600);
+    $lists = $this->Mod_peminjaman->get_datatables();
+    $data = array();
+    $no = $_POST['start'];
+    foreach ($lists as $list) {
+      $no++;
+      $row = array();
+      $row[] = $list->full_name;
+      $row[] = $list->nama_cabang;
+      $row[] = $list->from;
+      $row[] = $list->date;
+      $row[] = $list->closingdate;
+      $row[] = $list->note;
+      $data[] = $row;
+    }
+
+    $output = array(
+      "draw" => $_POST['draw'],
+      "recordsTotal" => $this->Mod_peminjaman->count_all(),
+      "recordsFiltered" => $this->Mod_peminjaman->count_filtered(),
+      "data" => $data,
+    );
+    
+    //output to json format
+    echo json_encode($output);
   }
 }

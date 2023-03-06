@@ -12,13 +12,15 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<table id="tbl_barang" class="table table-bordered table-striped table-hover">
+						<table id="tbl_peminjaman" class="table table-bordered table-striped table-hover">
 							<thead>
 								<tr class="bg-info">
-									<th>Kode barang</th>
-									<th>Nama barang</th>
-									<th>Harga</th>
-									<th>Satuan</th>
+									<th>User</th>
+									<th>Branch Name</th>
+									<th>From</th>
+									<th>Date</th>
+									<th>Closing Date</th>
+									<th>Note</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -45,11 +47,11 @@
 	$(document).ready(function() {
 
 		//datatables
-		table = $("#tbl_barang").DataTable({
+		table = $("#tbl_peminjaman").DataTable({
 			"responsive": true,
 			"autoWidth": false,
 			"language": {
-				"sEmptyTable": "Data Barang Belum Ada"
+				"sEmptyTable": "Data Peminjaman Belum Ada"
 			},
 			"processing": true, //Feature control the processing indicator.
 			"serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -57,7 +59,7 @@
 
 			// Load data for the table's content from an Ajax source
 			"ajax": {
-				"url": "<?php echo site_url('barang/ajax_list') ?>",
+				"url": "<?php echo site_url('peminjaman/ajax_list') ?>",
 				"type": "POST"
 			},
 			//Set column definition initialisation properties.

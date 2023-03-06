@@ -4,8 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Mod_peminjaman extends CI_Model
 {
 	var $table = 'peminjaman';
-	var $column_search = array('id_cabang', 'from', 'date', 'number', 'closingdate', 'note');
-	var $column_order = array('id_cabang', 'from', 'date', 'number', 'closingdate', 'note');
+	var $column_search = array('id_cabang', 'id_user', 'from', 'date', 'number', 'closingdate', 'note');
+	var $column_order = array('id_cabang', 'id_user', 'from', 'date', 'number', 'closingdate', 'note');
 	var $order = array('id_peminjaman' => 'desc');
 	function __construct()
 	{
@@ -52,6 +52,10 @@ class Mod_peminjaman extends CI_Model
 		$this->_get_datatables_query();
 		if ($_POST['length'] != -1)
 			$this->db->limit($_POST['length'], $_POST['start']);
+			$this->db->select("peminjaman.from, peminjaman.date, peminjaman.closingdate, peminjaman.note, tbl_user.full_name, cabang.nama_cabang");
+		// $this->db->select("peminjaman.from, peminjaman.date, peminjaman.number")->from('peminjaman','tbl_user')->join('tbl_user', 'tbl_user.id_user = peminjaman.id_user');
+		$this->db->join("tbl_user",'tbl_user.id_user = peminjaman.id_user', 'inner');
+		$this->db->join("cabang", "cabang.id_cabang = peminjaman.id_cabang", "inner");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -74,7 +78,7 @@ class Mod_peminjaman extends CI_Model
 		$this->db->insert($table, $data);
 		$insert_id = $this->db->insert_id();
 
-   return  $insert_id;
+		return  $insert_id;
 	}
 
 	function update_peminjaman($id_peminjaman, $data)

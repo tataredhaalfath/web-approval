@@ -20,7 +20,7 @@
                       <select class="form-control" id="direction" name="direction" require>
                         <option value="">Pilih Cabang ...</option>
                       </select>
-                      <!-- <input type="text" class="form-control" name="direction" id="direction" placeholder="Kepada"> -->
+                      <input type="hidden" class="form-control" name="user" id="user" value="<?= $this->session->userdata('id_user'); ?>">
                     </div>
                   </div>
                   <div class="col col-sm-6 col-md-4 col-lg-4 col-lg-4">
@@ -57,7 +57,7 @@
                           <td>Harga Satuan<input type="number" id="price1" placeholder="Harga Satuan" class="form-control" required /></td>
                           <td>Total Harga<input type="number" id="total1" placeholder="Total" class="form-control" required /></td>
                           <td>Maksimal Delivery<input type="date" id="maks1" placeholder="Maks Delivery" class="form-control date" required /></td>
-                          <td>Tambah List<button type="button" id="tambah" class="btn btn-success">Add +</button></td>
+                          <td><button type="button" id="tambah" class="btn btn-success">Tambah Barang +</button></td>
                         </tr>
                       </table>
                     </div>
@@ -152,6 +152,7 @@
       }
 
       const direction = $('#direction').val();
+      const userId = $('#user').val()
       const date = $('#date').val()
       const from = $('#from').val()
       const number = $('#number').val()
@@ -160,6 +161,7 @@
 
       const payload = {
         direction,
+        userId,
         date,
         from,
         number,
