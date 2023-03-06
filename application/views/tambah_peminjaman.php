@@ -57,7 +57,7 @@
                           <td>Harga Satuan<input type="number" id="price1" placeholder="Harga Satuan" class="form-control" required /></td>
                           <td>Total Harga<input type="number" id="total1" placeholder="Total" class="form-control" required /></td>
                           <td>Maksimal Delivery<input type="date" id="maks1" placeholder="Maks Delivery" class="form-control date" required /></td>
-                          <td><button type="button" id="tambah" class="btn btn-success">Tambah Barang +</button></td>
+                          <td> <br><button type="button" id="tambah" class="btn btn-success">Tambah Barang +</button></td>
                         </tr>
                       </table>
                     </div>
