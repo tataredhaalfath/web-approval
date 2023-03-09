@@ -180,6 +180,7 @@
 		});
 	}
 
+
 	function save() {
 		$('#btnSave').text('saving...'); //change button text
 		$('#btnSave').attr('disabled', true); //set button disable 
